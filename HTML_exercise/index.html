@@ -81,6 +81,25 @@
         <dt>Protein</dt>
         <dd>1g</dd>
     </dl>
+    <section>
+        <form>
+            <label for="reviewer_name">Reviewer name</label>
+            <input type="text" id="reviewer_name"><br>
+            <label for="rating">Rating</label>
+            <input type="radio" id="rating" value="1"><input type="radio" id="rating" value="2"><input type="radio" id="rating" value="3"><input type="radio" id="rating" value="4"><input type="radio" id="rating" value="5"><br>
+            <label for="cooking_expertise">Cooking Expertise</label>
+            <select id="cooking_expertise">
+                <option value="select_cooking_expetise" disabled selected>Select cooking expertise</option>
+                <option value="sometimes_cook">Sometimes cook</option>
+                <option value="cook_everyday">Cook everyday</option>
+                <option value="cooking_is_a_hobby">Cooking is a hobby</option>
+                <option valye="pro_chef">Professional chef</option>
+            </select><br>
+            <label for="review">Tell us what you think!</label><br>
+            <textarea id="review" name="review" rows ="5" cols="33">How was the recipe?</textarea>
+        </form>
+    </section>
+    <br>
     <footer>This recipe is my own!</footer>
 </body>
 </html>
