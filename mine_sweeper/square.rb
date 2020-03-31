@@ -1,7 +1,8 @@
 class Square
-    attr_reader :flag, :bomb, :revealed
+    attr_reader :flag, :mine, :revealed
+    attr_writer :mine
     def initialize(value)
-        @bomb = value || false
+        @mine = value || false
         @flag = false
         @revealed = false
     end
@@ -14,8 +15,8 @@ class Square
         end
     end
 
-    def bomb?
-        @bomb
+    def mine?
+        @mine
     end
 
     def flag?
