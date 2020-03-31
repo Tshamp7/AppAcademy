@@ -1,29 +1,25 @@
 class Square
-    attr_reader :flag, :mine, :revealed
-    attr_writer :mine
+    attr_accessor :mine, :value
     def initialize(value)
         @mine = value || false
-        @flag = false
-        @revealed = false
+        @value = "*"
     end
 
-    def flag(pos)
-        if flag == false
-            @flag = true
+    def flag
+        if @value == "*"
+            @value = "F"
         else
-            flag = false
+            @value = "*"
+        end
+    end
+
+    def reveal_blank
+        if @value == "*" && @mine == false
+            @value = "_"
         end
     end
 
     def mine?
         @mine
-    end
-
-    def flag?
-        @flag
-    end
-
-    def revealed?
-        @revealed
     end
 end

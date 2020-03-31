@@ -3,9 +3,11 @@ require_relative "square"
 class Board
     attr_reader :num_mines, :grid
 
+
     def initialize(difficulty)
         @grid = Array.new(9) { Array.new(9, Square.new(false)) }
         @num_mines = self.number_of_mines(difficulty)
+        @blank_grid = display_grid = Array.new(9) {Array.new(9, "*")}
     end
 
     def number_of_mines(difficulty)
@@ -39,23 +41,27 @@ class Board
     def rand_pos
         [rand(8), rand(8)]
     end
+ 
+    def render
+        puts "  #{(0..8).to_a.join(" ")}"
+        self.row_values.each_with_index do |row, idx|
+            puts "#{idx} #{row.join(" ")}"
+        end
+    end
 
-    #def rows
-        #rows = []
-        #self.grid.each do |row|
-            #rows << row
-        #end
-        #row
-    #end
-#
-    #def cols
-        #cols = []
-        #trans_grid = self.grid.transpose
-        #trans_grid.each do |col|
-            #cols << col
-        #end
-        #col
-    #end
+    def row_values
+        rows = []
+        self.grid.each do |row|
+            row_values = []
+            row.each do |square|
+                row_values << square.value
+            end
+            rows << row_values
+        end
+       rows
+    end
+
+ 
 
 
 
@@ -66,4 +72,4 @@ my_board = Board.new("Hell")
 
 my_board.populate
 
-my_board.rows
+my_board.render
