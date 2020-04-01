@@ -2,12 +2,12 @@ require_relative "square"
 
 class Board
     attr_reader :num_mines, :grid
+    attr_writer :grid
 
 
     def initialize(difficulty)
-        @grid = Array.new(9) { Array.new(9, Square.new(false)) }
+        @grid = Array.new(9) { Array.new(9) {Square.new(false)} }
         @num_mines = self.number_of_mines(difficulty)
-        @blank_grid = display_grid = Array.new(9) {Array.new(9, "*")}
     end
 
     def number_of_mines(difficulty)
@@ -26,7 +26,7 @@ class Board
         @num_mines
         used_pos = []
 
-        while num_mines > 0
+        while @num_mines > 0
            mine_pos = self.rand_pos
            if !used_pos.include?(mine_pos)
                 used_pos << mine_pos
@@ -49,17 +49,33 @@ class Board
         end
     end
 
-    def row_values
-        rows = []
-        self.grid.each do |row|
-            row_values = []
-            row.each do |square|
-                row_values << square.value
-            end
-            rows << row_values
+    def render_mines
+        puts "  #{(0..8).to_a.join(" ")}"
+        self.show_mines.each_with_index do |row, idx|
+            puts "#{idx} #{row.join(" ")}"
         end
-       rows
     end
+
+
+    def row_values
+      output = grid.map do |row|
+            row.map do |square|
+                square.value
+            end
+        end
+    end
+
+    def show_mines
+        output = grid.map do |row|
+              row.map do |square|
+                  if square.mine?
+                    "M"
+                  else
+                    "_"
+                  end
+              end
+          end
+      end
 
  
 
@@ -67,9 +83,8 @@ class Board
 
 
 end
-
-my_board = Board.new("Hell")
-
-my_board.populate
-
-my_board.render
+#my_board = Board.new("Hell")
+#
+#puts my_board.grid
+#
+#my_board.render

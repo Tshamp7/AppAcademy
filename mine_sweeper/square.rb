@@ -14,9 +14,7 @@ class Square
     end
 
     def reveal_blank
-        if @value == "*" && @mine == false
             @value = "_"
-        end
     end
 
     def mine?
