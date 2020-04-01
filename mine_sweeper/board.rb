@@ -39,6 +39,27 @@ class Board
         end
     end
 
+    def fringe_mine_count
+        fringe_mine_count = 0
+        @grid.each_with_index do |row, idx|
+            row.each_with_index do |col, idx2|
+                if @grid[idx][idx2].mine? && adjacent_blank_squares(idx, idx2) == 1
+                    fringe_mine_count += 1 
+                end
+            end
+        end
+        fringe_mine_count
+    end
+
+    def adjacent_blank_squares(row_idx, col_idx)
+        count = 0
+            count += 1 if @grid[row_idx + 1][col_idx].value == "_"
+            count += 1 if @grid[row_idx][col_idx + 1].value == "_"
+            count += 1 if @grid[row_idx - 1][col_idx].value == "_"
+            count += 1 if @grid[row_idx][col_idx - 1].value == "_"
+        return count
+    end
+
     def rand_pos
         [rand(8), rand(8)]
     end
@@ -85,7 +106,6 @@ class Board
                 count += 1 if square.value == "_"
             end
         end
-
         count
     end
 
@@ -95,8 +115,8 @@ class Board
 
 
 end
-my_board = Board.new("Hell")
-
-my_board.render
-
-p my_board.count_revealed_blanks
+#my_board = Board.new("Hell")
+#
+#my_board.render
+#
+#p my_board.count_revealed_blanks

@@ -38,14 +38,17 @@ class Game
         until @won == true || @game_over == true
             @board.render
             self.reveal(self.get_pos, self.get_action)
-            @board.render
+            puts "There are #{self.board.fringe_mine_count} mines in the areas bordering all free spaces."
+            self.won?
         end
     end
 
     def won?
-       
-
-
+      if @board.count_revealed_blanks == @board.free_spaces
+        @won = true
+        puts "Congratulations! You have revealed all free spaces! You are the champion mine sweeper!"
+        return true
+      end
     end
 
 
@@ -56,7 +59,7 @@ class Game
                 if str == "f" || str == "F"
                     current_square[row][col].flag
                 elsif current_square[row][col].mine?
-                    puts "Kabooooom!, youve hit a mine!"
+                    puts "Kabooooom!, you've hit a mine! (X__x)"
                     puts "Game Over!"
                     @board.render_mines
                     @game_over = true
