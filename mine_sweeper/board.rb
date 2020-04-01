@@ -1,13 +1,14 @@
 require_relative "square"
 
 class Board
-    attr_reader :num_mines, :grid
+    attr_reader :num_mines, :grid, :free_spaces
     attr_writer :grid
 
 
     def initialize(difficulty)
         @grid = Array.new(9) { Array.new(9) {Square.new(false)} }
         @num_mines = self.number_of_mines(difficulty)
+        @free_spaces = 81 - @num_mines
     end
 
     def number_of_mines(difficulty)
@@ -68,14 +69,25 @@ class Board
     def show_mines
         output = grid.map do |row|
               row.map do |square|
-                  if square.mine?
+                if square.mine?
                     "M"
-                  else
+                else
                     "_"
-                  end
-              end
-          end
-      end
+                end
+            end
+        end
+    end
+
+    def count_revealed_blanks
+        count = 0
+        @grid.each do |row|
+            row.each do |square|
+                count += 1 if square.value == "_"
+            end
+        end
+
+        count
+    end
 
  
 
@@ -83,8 +95,8 @@ class Board
 
 
 end
-#my_board = Board.new("Hell")
-#
-#puts my_board.grid
-#
-#my_board.render
+my_board = Board.new("Hell")
+
+my_board.render
+
+p my_board.count_revealed_blanks

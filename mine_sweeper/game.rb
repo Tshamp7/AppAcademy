@@ -52,24 +52,26 @@ class Game
     def reveal(arr, str)
         row, col = arr[0], arr[1]
         current_square = self.board.grid
-        if current_square == nil
-            return false
-        end
-            if str == "f" || str == "F"
-                current_square[row][col].flag
-            elsif current_square[row][col].mine == true
-                puts "Kabooooom!, youve hit a mine!"
-                puts "Game Over!"
-                @game_over = true
-            elsif current_square[row][col].value == "F"
-                puts "You cannot reveal a flagged square. Please unflag this square before choosing it."
-            elsif (str == "r" || str == "R") && current_square[row][col].mine == false && current_square[row][col].value == "*" || current_square[row][col].value == "_"
-                current_square[row][col].reveal_blank
-                if !current_square[row - 1][col].mine && !current_square[row][col + 1].mine && !current_square[row + 1][col].mine && !current_square[row][col - 1].mine
-                    self.reveal(self.up(arr), "r")
-                    self.reveal(self.right(arr), "r")
-                    self.reveal(self.down(arr), "r")
-                    self.reveal(self.left(arr), "r")
+            if row <= 8 || col <= 8 || row >= 0 || col >= 0
+                if str == "f" || str == "F"
+                    current_square[row][col].flag
+                elsif current_square[row][col].mine?
+                    puts "Kabooooom!, youve hit a mine!"
+                    puts "Game Over!"
+                    @board.render_mines
+                    @game_over = true
+                elsif current_square[row][col].value == "F"
+                    puts "You cannot reveal a flagged square. Please unflag this square before choosing it."
+                elsif (str == "r" || str == "R") && current_square[row][col].value == "*"
+                    current_square[row][col].reveal_blank
+                    if row == 8 || col == 8 || row == 0 || col == 0
+                        return false
+                    elsif !current_square[row - 1][col].mine? && !current_square[row][col + 1].mine? && !current_square[row + 1][col].mine? && !current_square[row][col - 1].mine?
+                        self.reveal(self.up(arr), "r")
+                        self.reveal(self.right(arr), "r")
+                        self.reveal(self.down(arr), "r")
+                        self.reveal(self.left(arr), "r")
+                    end
                 end
             end
     end
