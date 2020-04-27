@@ -1,0 +1,92 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FEFFF1;
+    width: 960px;
+    margin: auto;
+}
+
+input[type="radio"], select, input[type="submit"] {
+    cursor: pointer;
+    outline: none;
+}
+
+input:last-child {
+    background: gold;
+}
+
+input:last-child:hover {
+    -webkit-filter: brightness(90%);
+}
+
+input[type="radio"] {
+    -webkit-appearance: none;
+    width: 27px;
+    height: 27px;
+    background-image: url(./stars.png);
+    vertical-align: bottom;
+}
+
+input[type="radio"]:hover {
+    background-position: 30px 60px;
+  }
+  
+  input[type="radio"]:checked {
+    background-position: 30px 30px;
+  }
+  
+
+ul li a {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+dl {
+    display: flex;
+    flex-flow: row wrap;
+    border: solid #333;
+    border-width: 1px 1px 0 0;
+  }
+  dt {
+    flex-basis: 20%;
+    padding: 2px 4px;
+    background: #333;
+    text-align: right;
+    color: #fff;
+  }
+  dd {
+    flex-basis: 70%;
+    flex-grow: 1;
+    margin: 0;
+    padding: 2px 4px;
+    border-bottom: 1px solid #333;
+  }
+
+header > image {
+    width: 100px;
+}
+
+ol {
+    list-style: upper-roman inside;
+}
+
+ol li:nth-of-type(2n) {
+    background-color: whitesmoke;
+}
+
+.square-list {
+    list-style: square inside;
+}
+
+h1 {
+    font-size: 38px;
+}
+
+h2 {
+    font-size: 32px;
+}
+
+h2 + .user_review {
+    border-top: 1px solid black;
+  }
+
